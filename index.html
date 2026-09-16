@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tracked Out — Ski &amp; Snowboard Tracking</title>
+    <meta name="description" content="Turn on tracking at the first chair and forget about it. Vertical, speed, turn counts and a map of every lap — plus a read on where you're losing time." />
+    <meta name="theme-color" content="#F5F5F7" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Tracked Out — Ski &amp; Snowboard Tracking" />
+    <meta property="og:description" content="Turn on tracking at the first chair and forget about it. Vertical, speed, turn counts and a map of every lap — plus a read on where you're losing time." />
+    <meta property="og:site_name" content="Tracked Out" />
+    <meta property="og:url" content="https://trackedout.app/" />
+    <meta property="og:image" content="https://trackedout.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Tracked Out — ski and snowboard tracking for iPhone" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tracked Out — Ski &amp; Snowboard Tracking" />
+    <meta name="twitter:description" content="Turn on tracking at the first chair and forget about it. Vertical, speed, turn counts and a map of every lap — plus a read on where you're losing time." />
+    <meta name="twitter:image" content="https://trackedout.app/og-image.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- SPA redirect restore for GitHub Pages (see public/404.html) -->
+    <script>
+      (function(l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search.slice(1).split('&').map(function(s) {
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+        }
+      }(window.location))
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,115 @@
+/*
+ * Tracked Out design tokens — transcribed from design/HANDOFF.md.
+ * The prototype styled everything inline (a design-tool constraint); these are the
+ * same values promoted to variables so the site has one source of truth.
+ */
+:root {
+  /* Neutrals */
+  --ink: #1c1c1e;
+  --ink-deep: #0c0c14;
+  --surface: #f5f5f7;
+  --white: #ffffff;
+  --hairline: #e4e4e8;
+  --hairline-strong: #d8d8de;
+  --dark-card: #23232b;
+  --dark-border: #33333d;
+  --dark-border-2: #2a2a32;
+
+  /* Text */
+  --body-grey: #4a4a4e;
+  --muted-grey: #8e8e93;
+  --muted-warm: #9c9c99;
+
+  /* Accents */
+  --teal-bright: #43edea;
+  --teal-deep: #00b5b2;
+  --teal-deeper: #00807e;
+  --lime: #c6ee7a;
+  --yellow: #fffa00;
+  --green-text: #5c9e12;
+  --purple: #a048fa;
+  --purple-deep: #7a2fd0;
+  --magenta: #c4008f;
+  --magenta-bright: #ff02e6;
+  --gold-text: #96760a;
+
+  --brand-gradient: linear-gradient(135deg, #fffa00, #c6ee7a);
+
+  /* Type */
+  --font-display: 'Gemunu Libre', 'Trebuchet MS', sans-serif;
+  --font-body: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-script: 'DeadStock', 'Gemunu Libre', cursive;
+
+  /* Layout */
+  --content-max: 1328px;
+  --gutter: 56px;
+
+  /* Shadows */
+  --shadow-card: 0 18px 44px rgba(28, 28, 30, 0.16);
+  --shadow-glass: 0 24px 60px rgba(12, 12, 20, 0.3);
+  --shadow-brand: 0 14px 30px rgba(198, 238, 122, 0.6);
+  --shadow-brand-hover: 0 20px 42px rgba(198, 238, 122, 0.76);
+  --shadow-dark: 0 14px 30px rgba(28, 28, 30, 0.3);
+  --shadow-dark-hover: 0 20px 42px rgba(28, 28, 30, 0.4);
+}
+
+@media (max-width: 900px) {
+  :root { --gutter: 24px; }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* The sticky header is 84px tall; keep anchor targets clear of it. */
+  scroll-padding-top: 84px;
+  background: var(--surface);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
+a:hover { color: var(--teal-deep); }
+
+img { max-width: 100%; }
+
+/* ---- Keyframes (timings per HANDOFF.md § Interactions & behavior) ---- */
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translate3d(0, 26px, 0) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes driftA { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -7px, 0); } }
+@keyframes driftB { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -5px, 0); } }
+@keyframes driftC { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -8px, 0); } }
+
+/* The 55% hold is what makes this a periodic glint rather than a constant sweep. */
+@keyframes sheen {
+  0%        { transform: translateX(-120%); }
+  55%, 100% { transform: translateX(230%); }
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+/*
+ * The prototype had no reduced-motion story. Everything decorative here is
+ * animation or transition, so a blanket stop is both correct and sufficient;
+ * the JS side separately pauses demo autoplay and parallax.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

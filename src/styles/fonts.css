@@ -1,0 +1,15 @@
+/* Display: Gemunu Libre 400–800. Body/UI: Noto Sans 400–700. */
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap');
+
+/*
+ * Brand script, used only for the "Go Track" wordmark in the download CTA band.
+ * Licensing for web embedding is UNCONFIRMED (flagged in design/HANDOFF.md) — if it
+ * does not clear, swap the wordmark for an SVG lockup and drop this face. The stack
+ * falls back to the display face so the band never renders in a system serif.
+ */
+@font-face {
+  font-family: 'DeadStock';
+  src: url('/fonts/DeadStock.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
