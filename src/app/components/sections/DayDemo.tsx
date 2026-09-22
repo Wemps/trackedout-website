@@ -9,9 +9,9 @@ const DURATION = 5200;
 const TICK = 90;
 
 const CHAPTERS = [
-  { index: "01", title: "Before · plan the day", sub: "Forecast, offline maps, favorites" },
-  { index: "02", title: "On the hill · send & track", sub: "Auto sessions, live coaching, crew" },
-  { index: "03", title: "After · relive it", sub: "Recap, photo book, season stats" },
+  { index: "01", title: "Plan the day", sub: "Forecast, offline maps, favorites" },
+  { index: "02", title: "On the hill", sub: "Auto sessions, live coaching, crew" },
+  { index: "03", title: "Relive your day", sub: "Recap, photo book, season stats" },
 ];
 
 const chipStyle = {
@@ -102,7 +102,7 @@ function ChapterTwo() {
         <ChapterHeading>Drop in. It's already recording.</ChapterHeading>
         <ChapterCopy>
           Sessions start themselves when you get to the hill. Sensei calls out your turn balance between laps, live
-          stats sit on the lock screen, and the crew shows up on the map so nobody burns a lap looking for anybody.
+          stats sit on the lock screen, and the crew shows up on the map so you always know roughly where everyone is.
         </ChapterCopy>
         <Chips items={["Auto sessions", "Live Activity", "Realtime coaching", "Crew map · beta"]} accent="Crew map · beta" />
       </div>
@@ -149,10 +149,10 @@ function ChapterThree() {
     <div className="demo-chapter">
       <div style={{ flex: 1, minWidth: 0 }}>
         <Eyebrow color="#C08A00">4:15 PM · LAST CHAIR</Eyebrow>
-        <ChapterHeading>The day you'd have forgotten by Tuesday</ChapterHeading>
+        <ChapterHeading>Your day, run by run</ChapterHeading>
         <ChapterCopy>
           Vertical, runs, every trail by name, and the photos you shot without meaning to. Flag the ones that were
-          special, fire off the share card, export the GPX — then watch the season stack up against every season before
+          special, fire off the share card, export the GPX, then watch the season stack up against every season before
           it.
         </ChapterCopy>
         <Chips items={["Session recap", "Photo book", "Share card", "GPX export"]} />

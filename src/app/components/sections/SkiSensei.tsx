@@ -37,7 +37,7 @@ export function SkiSensei() {
           </SectionHeading>
           <Lead style={{ margin: 0 }}>
             Ski Sensei scores five categories every session, spots the technical gap, and gives you the drill for the
-            next run. Built from the data Tracked Out already collects — no extra hardware, no video, no coach on the
+            next run. Built from the data Tracked Out already collects. No extra hardware, no video, no coach on the
             payroll.
           </Lead>
         </div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const DEFAULT_TITLE = "Tracked Out — Ski & Snowboard Tracking";
 const DEFAULT_DESCRIPTION =
-  "Turn on tracking at the first chair and forget about it. Vertical, speed, turn counts and a map of every lap — plus a read on where you're losing time.";
+  "Turn on tracking at the first chair and forget about it. Vertical, speed, turn counts and a map of every lap, plus a read on where you're losing time.";
 
 function setMeta(selector: string, content: string) {
   document.head.querySelector<HTMLMetaElement>(selector)?.setAttribute("content", content);

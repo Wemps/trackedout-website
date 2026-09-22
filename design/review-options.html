@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tracked Out — reviews section options</title>
+<link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C1C1E; --ink-deep:#0C0C14; --surface:#F5F5F7; --hairline:#E4E4E8;
+    --hairline-strong:#D8D8DE; --dark-card:#23232B; --dark-border:#33333D;
+    --body-grey:#4A4A4E; --muted-grey:#8E8E93; --muted-warm:#9C9C99;
+    --teal-bright:#43EDEA; --teal-deep:#00B5B2; --lime:#C6EE7A; --yellow:#FFFA00;
+    --font-display:'Gemunu Libre',sans-serif; --font-body:'Noto Sans',sans-serif;
+    --content-max:1328px; --gutter:56px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--surface);font-family:var(--font-body);color:var(--ink)}
+  .label{max-width:var(--content-max);margin:0 auto;padding:40px var(--gutter) 0;
+    font-family:var(--font-display);font-weight:700;font-size:13px;letter-spacing:.18em;color:var(--teal-deep)}
+  .label span{color:var(--muted-grey);font-family:var(--font-body);font-weight:500;letter-spacing:0;font-size:13px;display:block;margin-top:6px;text-transform:none}
+  .wrap{max-width:var(--content-max);margin:0 auto}
+  section{padding:56px var(--gutter) 72px;border-top:1px solid var(--hairline);background:#fff;margin-top:24px}
+
+  /* ---------- A: current ---------- */
+  .a-head{display:flex;align-items:baseline;gap:18px;margin-bottom:36px}
+  .a-score{font-family:var(--font-display);font-weight:700;font-size:62px;line-height:1}
+  .a-sub{font-weight:600;font-size:14px;letter-spacing:.08em;color:var(--muted-grey)}
+  .a-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .a-card{padding:28px;border:1px solid var(--hairline);border-radius:20px}
+  .a-title{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.3;margin-bottom:12px}
+  .a-quote{margin:0 0 16px;font-size:15px;line-height:1.6;color:var(--body-grey)}
+  .a-name{font-weight:500;font-size:12px;color:var(--muted-grey)}
+
+  /* ---------- B: stat bar + quiet quotes ---------- */
+  .b-bar{display:flex;align-items:center;gap:0;border:1px solid var(--hairline);border-radius:24px;overflow:hidden;margin-bottom:40px}
+  .b-cell{flex:1;padding:26px 28px;border-right:1px solid var(--hairline)}
+  .b-cell:last-child{border-right:0}
+  .b-big{font-family:var(--font-display);font-weight:700;font-size:44px;line-height:1}
+  .b-big.accent{color:var(--teal-deep)}
+  .b-lab{font-weight:500;font-size:10.5px;letter-spacing:.09em;color:var(--muted-grey);margin-top:8px}
+  .b-stars{display:flex;gap:3px;margin-bottom:6px}
+  .b-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .b-quote{margin:0 0 14px;font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.25}
+  .b-body{margin:0 0 14px;font-size:14.5px;line-height:1.65;color:var(--body-grey)}
+  .b-name{font-weight:500;font-size:12px;color:var(--muted-grey)}
+  .b-rule{width:28px;height:2px;background:var(--lime);margin-bottom:16px}
+
+  /* ---------- C: dark band, single pulled quote ---------- */
+  .c{background:var(--ink);color:#fff;border-top:0}
+  .c-inner{display:flex;gap:64px;align-items:flex-start}
+  .c-left{flex:0 0 300px}
+  .c-score{font-family:var(--font-display);font-weight:700;font-size:86px;line-height:.9;color:var(--teal-bright)}
+  .c-sub{font-weight:600;font-size:12px;letter-spacing:.1em;color:var(--muted-warm);margin-top:10px}
+  .c-count{font-size:13.5px;line-height:1.7;color:var(--muted-warm);margin-top:18px}
+  .c-pull{margin:0 0 28px;font-family:var(--font-display);font-weight:700;font-size:34px;line-height:1.25}
+  .c-small{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding-top:26px;border-top:1px solid var(--dark-border)}
+  .c-sq{margin:0 0 10px;font-size:14.5px;line-height:1.6;color:#E2E2E8}
+  .c-sn{font-weight:500;font-size:11.5px;color:var(--muted-warm)}
+  .star{width:16px;height:16px;display:block}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><symbol id="s" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></symbol></svg>
+
+<div class="label">Option A — what's on the site now<span>Big number, three bordered cards. Reads like an app-store screenshot.</span></div>
+<section><div class="wrap">
+  <div class="a-head"><span class="a-score">4.8</span><span class="a-sub">ON THE APP STORE</span></div>
+  <div class="a-grid">
+    <div class="a-card"><div class="a-title">This totally rips!</div><p class="a-quote">"Best way I've found to remember the best paths down the hill. Super accurate and EASY TO USE."</p><div class="a-name">Elroy J Shredder</div></div>
+    <div class="a-card"><div class="a-title">Pro pass user here</div><p class="a-quote">"Blown away by the ski metrics and map detail, felt like the dev was giving away too much in the free version."</p><div class="a-name">Brittsnoel</div></div>
+    <div class="a-card"><div class="a-title">More like Tracked Fun!</div><p class="a-quote">"I used to get lost with no idea how many runs I'd taken. With Tracked Out, I stay on track!"</p><div class="a-name">PowderSnortingElk</div></div>
+  </div>
+</div></section>
+
+<div class="label">Option B — proof bar, then quiet quotes<span>Leads with numbers that aren't just the rating, then drops the card borders so the quotes read as voices rather than tiles.</span></div>
+<section><div class="wrap">
+  <div class="b-bar">
+    <div class="b-cell">
+      <div class="b-stars"><svg class="star" fill="#FFB800"><use href="#s"/></svg><svg class="star" fill="#FFB800"><use href="#s"/></svg><svg class="star" fill="#FFB800"><use href="#s"/></svg><svg class="star" fill="#FFB800"><use href="#s"/></svg><svg class="star" fill="#FFB800"><use href="#s"/></svg></div>
+      <div class="b-big accent">4.8</div><div class="b-lab">ON THE APP STORE</div>
+    </div>
+    <div class="b-cell"><div class="b-big">1.4M</div><div class="b-lab">RUNS RECORDED</div></div>
+    <div class="b-cell"><div class="b-big">4,072</div><div class="b-lab">RESORTS MAPPED</div></div>
+    <div class="b-cell"><div class="b-big">38</div><div class="b-lab">COUNTRIES</div></div>
+  </div>
+  <div class="b-grid">
+    <div><div class="b-rule"></div><p class="b-quote">"Best way I've found to remember the best paths down the hill."</p><p class="b-body">Super accurate and easy to use.</p><div class="b-name">Elroy J Shredder</div></div>
+    <div><div class="b-rule"></div><p class="b-quote">"Felt like the dev was giving away too much in the free version."</p><p class="b-body">Blown away by the ski metrics and map detail.</p><div class="b-name">Brittsnoel</div></div>
+    <div><div class="b-rule"></div><p class="b-quote">"I used to get lost with no idea how many runs I'd taken."</p><p class="b-body">With Tracked Out, I stay on track.</p><div class="b-name">PowderSnortingElk</div></div>
+  </div>
+</div></section>
+
+<div class="label">Option C — dark band, one quote carries it<span>Sits between the light Crew section and the brand-gradient CTA, so the page gets a beat of dark before the finish. One quote is the argument; two support it.</span></div>
+<section class="c"><div class="wrap">
+  <div class="c-inner">
+    <div class="c-left">
+      <div class="b-stars"><svg class="star" fill="#C6EE7A"><use href="#s"/></svg><svg class="star" fill="#C6EE7A"><use href="#s"/></svg><svg class="star" fill="#C6EE7A"><use href="#s"/></svg><svg class="star" fill="#C6EE7A"><use href="#s"/></svg><svg class="star" fill="#C6EE7A"><use href="#s"/></svg></div>
+      <div class="c-score">4.8</div>
+      <div class="c-sub">ON THE APP STORE</div>
+      <div class="c-count">From skiers and riders who<br>track every day they get.</div>
+    </div>
+    <div style="flex:1">
+      <p class="c-pull">"Blown away by the ski metrics and map detail. Felt like the dev was giving away too much in the free version."</p>
+      <div class="c-sn" style="margin-bottom:4px">Brittsnoel · Pro Pass</div>
+      <div class="c-small">
+        <div><p class="c-sq">"Best way I've found to remember the best paths down the hill. Super accurate and easy to use."</p><div class="c-sn">Elroy J Shredder</div></div>
+        <div><p class="c-sq">"I used to get lost with no idea how many runs I'd taken. With Tracked Out, I stay on track."</p><div class="c-sn">PowderSnortingElk</div></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+</body>
+</html>

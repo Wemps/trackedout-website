@@ -46,7 +46,7 @@ const BOARD = [
 ] as const;
 
 const GUARANTEES = [
-  "Off by default — you turn it on for the day",
+  "Off by default. You turn it on for the day",
   "Location shared only with the code, only while lifts run",
   "Nothing retained after the day ends",
 ];
@@ -76,22 +76,22 @@ export function Crew() {
           </div>
           <SectionHeading style={{ margin: "0 0 18px", maxWidth: "none" }}>Nobody's waiting at the bottom anymore</SectionHeading>
           <Lead style={{ margin: 0 }}>
-            Six people, three abilities, two radios that don't work. Crew turns the group text into something that
-            actually functions on a mountain: see where everybody is, know who's lapping what, and settle the vertical
-            argument with numbers at the end of the day. Opt in per day, off by default, gone at last chair.
+            Crew does two things. It shows you the part of the mountain everyone is lapping, so you can tell who's on
+            the steeps and who's cruising groomers. And it ranks the day for vertical, runs and speed, so there's a
+            scoreboard at the end of it. Opt in per day, off by default, gone at last chair.
           </Lead>
         </div>
 
         <CrewRow
           eyebrow="LIVE CREW MAP"
           eyebrowColor="var(--magenta)"
-          heading="Stop burning laps looking for people"
+          heading="See where everyone's lapping"
           body={
             <>
               <p style={{ margin: "0 0 12px", fontSize: 16, lineHeight: 1.7, color: "var(--body-grey)" }}>
-                Everyone who's opted in shows up on the trail map, on the real terrain, with the run they're on and how
-                long ago they moved. You can tell the difference between "on the chair behind you" and "went to the
-                lodge forty minutes ago" without sending a single text.
+                Everyone who's opted in shows up on the trail map, on the real terrain, with the part of the mountain
+                they're lapping and how long ago they moved. Enough to tell whether someone is a chair behind you or
+                already back at the lodge.
               </p>
               <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: "var(--muted-grey)" }}>
                 Tap a name to see their last run and pick a lift to meet at.
@@ -126,7 +126,7 @@ export function Crew() {
           body={
             <>
               <p style={{ margin: "0 0 12px", fontSize: 16, lineHeight: 1.7, color: "var(--body-grey)" }}>
-                Vertical, runs, top speed, time on snow — ranked for the day, the trip or the whole season. It's the
+                Vertical, runs, top speed, time on snow, ranked for the day, the trip or the whole season. It's the
                 same data your session already collects, just pointed at your friends instead of your own history.
               </p>
               <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: "var(--muted-grey)" }}>
@@ -188,7 +188,7 @@ export function Crew() {
             <>
               <p style={{ margin: "0 0 12px", fontSize: 16, lineHeight: 1.7, color: "var(--body-grey)" }}>
                 Crew works on day passes. You share a code with the people you're riding with, it lasts until last
-                chair, and then it's over — nobody stays on your map for the rest of the season because you went skiing
+                chair, and then it's over. Nobody stays on your map for the rest of the season because you went skiing
                 together once in December.
               </p>
               <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: "var(--muted-grey)" }}>

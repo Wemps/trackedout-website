@@ -19,10 +19,10 @@ const STATS = [
 const FEATURES: { name: string; detail: string; free: boolean }[] = [
   { name: "Vertical & distance", detail: "Per run, per session, per season, plus vertical and distance per hour.", free: true },
   { name: "Speed", detail: "Max and average per run, filtered for GPS noise and impossible values.", free: true },
-  { name: "Turn analysis", detail: "Count, direction balance, angle and type — carving, slalom or controlled — by terrain grade.", free: false },
+  { name: "Turn analysis", detail: "Count, direction balance, angle, and type (carving, slalom or controlled) by terrain grade.", free: false },
   { name: "Slope & terrain", detail: "Max sustained slope, slope engagement, cliff drop detection, difficulty normalized across resorts.", free: false },
   { name: "Motion & effort", detail: "Runs per hour, pauses per run, time riding versus resting versus in line.", free: false },
-  { name: "Trail maps", detail: "4,072 resorts on 3D terrain with satellite, run names and stats — downloadable for offline days.", free: true },
+  { name: "Trail maps", detail: "4,072 resorts on 3D terrain with satellite, run names and stats, downloadable for offline days.", free: true },
   { name: "Terrain layers", detail: "Slope shading, north-facing aspect and cliff detection, stacked over any base map.", free: false },
   { name: "Heat maps", detail: "Your track shaded by speed or slope difficulty, over 3D terrain.", free: false },
   { name: "Apple Health", detail: "Sessions written back to Health so the day counts where the rest of your training lives.", free: false },
@@ -65,7 +65,8 @@ export function Metrics() {
             actually spent riding.
           </p>
           <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.6, color: "var(--muted-warm)" }}>
-            Efficient GPS and smart run detection — a full day on a fraction of your battery, no signal required.
+            Efficient GPS and smart run detection give you a full day on a fraction of your battery, no signal
+            required.
           </p>
         </div>
 

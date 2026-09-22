@@ -19,7 +19,7 @@ export function Maps() {
           </SectionHeading>
           <p style={{ margin: 0, maxWidth: 820, fontSize: 17.5, lineHeight: 1.65, color: "rgba(255,255,255,.7)" }}>
             Trail maps for 4,000+ resorts layered on real terrain. Tilt it, shade it by pitch, flip to satellite, tap
-            any run for its numbers and your history on it — then take it all offline.
+            any run for its numbers and your history on it, then take it all offline.
           </p>
         </div>
       </div>

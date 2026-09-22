@@ -96,7 +96,7 @@ export function Hero() {
 
           <p style={{ margin: "0 0 32px", maxWidth: 440, fontSize: 17, lineHeight: 1.6, color: "var(--body-grey)" }}>
             Turn on tracking at the first chair and forget about it. You get vertical, speed, turn counts and a map of
-            every lap — plus a read on what you did well and where you're losing time.
+            every lap, plus a read on what you did well and where you're losing time.
           </p>
 
           <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
