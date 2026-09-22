@@ -11,21 +11,6 @@ counts and a map of every lap, plus a read on what you did well and where you're
 
 The Tracked Out marketing site — one page, statically built, no backend.
 
-Built from the Claude Design handoff in [`design/`](design/). See
-[`design/HANDOFF.md`](design/HANDOFF.md) for the authoritative spec: tokens, type scale,
-section-by-section layout, animation timings and the list of placeholders. Where the handoff
-and the design file disagree, the design file wins and the difference is noted in a comment at
-the call site.
-
-Stack, matching [signalcab-website](https://github.com/Wemps/signalcab-website):
-
-- [React](https://react.dev) 18 + [React Router](https://reactrouter.com) 7
-- [Vite](https://vite.dev) 6 + TypeScript
-- [Tailwind CSS](https://tailwindcss.com) v4 utilities over a CSS-variable token layer
-- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/) for the interactive map, and the Static
-  Images API for the two decorative ones
-- Deployed to [GitHub Pages](https://pages.github.com) on push to `main`
-
 ## Local development
 
 ```bash
@@ -67,23 +52,6 @@ is served publicly from GitHub Pages. The Actions secret keeps the value out of 
 out of the *bundle*. That is normal and correct for a Mapbox `pk.*` token; spend is protected by
 URL restrictions and a monthly limit set in the Mapbox account, not by hiding the string.
 
-## Maps
-
-Three maps, split by what they need to do:
-
-| | Render | Style | Cost per visitor |
-|---|---|---|---|
-| Demo panel | static `<img>` | `TrackedOut-Dark-v3-Basic` | 1 image request |
-| Crew map | static `<img>` | `TrackedOut-Light-v3-Basic` | 1 image request |
-| Maps band | **GL JS** | `TrackedOut-Standard-v4` | 1 billed map load |
-
-Only the band needs GL JS, because only the band has working layer toggles. It is initialised
-by an `IntersectionObserver` that latches, so a visitor who never scrolls that far costs
-nothing and scrolling back does not bill twice.
-
-The two static maps use the app's *pre-Standard* styles on purpose: the Static Images API
-rejects any style that imports Mapbox Standard, which the current app style does.
-
 ## Assets
 
 `design/assets/` holds the untouched handoff exports. `src/assets/` holds the web-ready versions
@@ -101,32 +69,6 @@ the bundle from 8.4MB to ~418KB. Re-run it whenever an asset is re-exported.
 opens. Their generated `src/assets/logo-*.webp` are committed, so the site builds fine without
 them; you only need the originals back in `design/assets/` to re-run the logo half of the script.
 They are in the original Claude Design handoff bundle.
-
-## Before launch
-
-- [ ] **App Store URL.** `src/app/config.ts` has a placeholder ID and an empty provider token.
-- [ ] **Keep the two legacy Mapbox styles alive.** The demo and crew maps render
-      `TrackedOut-Dark-v3-Basic` and `TrackedOut-Light-v3-Basic`, which the iOS app no longer
-      uses and which survive only because nobody deleted them. The Static Images API refuses any
-      style importing Mapbox Standard, so the current app style cannot replace them. Either mark
-      them keep-alive or duplicate them as web-owned styles.
-- [ ] **Mapbox URL restrictions and a monthly spend limit**, before the site is public.
-- [ ] **Reviews are invented.** The 4.8 and all three quotes are mock copy. Deliberately not
-      published as `aggregateRating` structured data while that is true.
-- [ ] **Resort counts.** 4,072 resorts and 38 countries come from the mock; confirm before
-      shipping.
-- [ ] **Privacy policy and EULA.** Footer links are placeholders, and the App Store listing
-      needs a real privacy URL.
-- [ ] **The privacy policy has to mention Mapbox.** GL JS sends a billing beacon to
-      `events.mapbox.com` and writes `mapbox.eventData` to localStorage. Neither can be disabled,
-      and both sit awkwardly beside "Nothing about your day leaves your phone." This applies to
-      the Maps band only; the two static maps are plain image requests.
-- [ ] **DeadStock font licensing.** Used for the "Go Track" wordmark and the crew beta button.
-      Unconfirmed for web embedding; an SVG lockup is the safe fallback.
-- [ ] **Stat cards** are flat PNG exports of app components. Rebuild as real components so they
-      scale and theme.
-- [ ] **Mobile and tablet were never designed.** Everything below 900px is implementation-side,
-      following the fallback `HANDOFF.md` sanctions. Worth a design pass.
 
 ## License
 
