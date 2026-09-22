@@ -30,11 +30,11 @@ export const HAS_MAPBOX = Boolean(MAPBOX_TOKEN);
 /**
  * Styles.
  *
- * WARNING: the two `*_BASIC` styles were dropped from the iOS app in commit
- * be4560d7 when four styles were collapsed into one Standard-based style with a
- * day/night `lightPreset`. They still exist in the Mapbox account and this site
- * now depends on them. Do not delete them from Mapbox Studio without replacing
- * the references here first.
+ * WARNING: the two `*_BASIC` styles are no longer used by the iOS app — they
+ * were dropped when four styles were collapsed into one Standard-based style
+ * with a day/night `lightPreset`. They still exist in the Mapbox account and
+ * this site now depends on them. Do not delete them from Mapbox Studio without
+ * replacing the references here first.
  */
 export const STYLE = {
   /** Live app style. GL JS only — imports Standard, so no static rendering. */
