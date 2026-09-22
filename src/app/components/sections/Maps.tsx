@@ -4,7 +4,7 @@ import { ResortMap } from "../ui/ResortMap";
 const STATS = [
   { value: "4,072", label: "RESORTS MAPPED", accent: true },
   { value: "38", label: "COUNTRIES" },
-  { value: "5", label: "MAP LAYERS" },
+  { value: "4", label: "MAP LAYERS" },
   { value: "100%", label: "WORKS OFFLINE" },
 ];
 
@@ -40,22 +40,6 @@ export function Maps() {
             <p style={{ margin: 0, fontSize: 16, lineHeight: 1.7, color: "var(--muted-warm)" }}>
               Tracking, trail names and stats all keep working in airplane mode.
             </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "15px 20px",
-                borderRadius: 32,
-                background: "var(--dark-card)",
-                border: "1px solid var(--dark-border)",
-                marginTop: 24,
-                maxWidth: 420,
-              }}
-            >
-              <span style={{ width: 9, height: 9, borderRadius: "50%", background: "var(--teal-bright)" }} aria-hidden="true" />
-              <span style={{ fontSize: 15, color: "var(--muted-warm)" }}>Search 4,072 resorts…</span>
-            </div>
           </div>
 
           <div className="maps-stats">

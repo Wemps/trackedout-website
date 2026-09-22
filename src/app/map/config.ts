@@ -66,8 +66,14 @@ export const CAMERA = {
   demo: { center: [-120.248, 39.193] as [number, number], zoom: 12.3 },
   /** Crew map, 560x360. Crystal Mountain — matches the day-pass card's copy. */
   crew: { center: [-121.488, 46.93] as [number, number], zoom: 12 },
-  /** Maps band, full-bleed. Crystal Mountain, tilted into a flyover. */
-  band: { center: [-121.488, 46.93] as [number, number], zoom: 13.2, bearing: 20, pitch: 60 },
+  /**
+   * Maps band, full-bleed. Crystal Mountain, tilted into a flyover.
+   *
+   * Bearing 270 puts west at the top, which sets the camera east of the
+   * mountain looking back at it — Crystal's terrain is mostly south- and
+   * east-facing, so this is the side with the runs on it.
+   */
+  band: { center: [-121.488, 46.93] as [number, number], zoom: 13.8, bearing: 270, pitch: 60 },
 } as const;
 
 /** Slope tilesets. Only North America ships — every camera is a US resort. */

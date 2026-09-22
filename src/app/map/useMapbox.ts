@@ -101,6 +101,12 @@ export function useMapbox(options: UseMapboxOptions) {
         instance.on("style.load", () => {
           if (cancelled || !instance) return;
           instance.addControl(new gl.AttributionControl({ compact: false }), "bottom-right");
+          // Dev-only handle, for poking at layers and paint properties from the
+          // console. Stripped from production builds by the constant folding on
+          // import.meta.env.DEV.
+          if (import.meta.env.DEV) {
+            (window as unknown as { __toMap?: unknown }).__toMap = instance;
+          }
           setMap(instance);
           setStatus("ready");
         });
