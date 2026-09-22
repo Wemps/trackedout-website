@@ -97,6 +97,11 @@ That step matters. The handoff's logo SVGs are traced outlines (~3.1MB each, sti
 after precision reduction) and the PNGs are exported at 2–5x their display size. The script takes
 the bundle from 8.4MB to ~418KB. Re-run it whenever an asset is re-exported.
 
+**The two logo SVGs are gitignored** — 6MB of traced outlines in every clone, for files nobody
+opens. Their generated `src/assets/logo-*.webp` are committed, so the site builds fine without
+them; you only need the originals back in `design/assets/` to re-run the logo half of the script.
+They are in the original Claude Design handoff bundle.
+
 ## Before launch
 
 - [ ] **App Store URL.** `src/app/config.ts` has a placeholder ID and an empty provider token.

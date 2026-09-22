@@ -2,8 +2,11 @@
  * Turns the design handoff's raster assets into web-ready ones.
  *
  * Sources live in design/assets/ (the untouched handoff bundle); the optimised
- * results are written to src/assets/ and are what the app imports. Re-run after
- * any asset is re-exported:
+ * results are written to src/assets/ and are what the app imports.
+ *
+ * NOTE: the two logo SVGs are gitignored (3MB each), so a fresh clone has the
+ * generated WebP but not the sources. Restore them from the handoff bundle
+ * before re-running the logo jobs below. Re-run after any asset is re-exported:
  *
  *   npm i --no-save sharp && node scripts/build-assets.mjs
  *
