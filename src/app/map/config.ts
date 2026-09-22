@@ -69,11 +69,53 @@ export const CAMERA = {
   /**
    * Maps band, full-bleed. Crystal Mountain, tilted into a flyover.
    *
-   * Bearing 270 puts west at the top, which sets the camera east of the
-   * mountain looking back at it — Crystal's terrain is mostly south- and
-   * east-facing, so this is the side with the runs on it.
+   * Bearing 247.5 is the true bearing from this centre to the summit of Mount
+   * Rainier, 22.4km away, so the volcano sits dead ahead on the horizon. It
+   * also keeps the camera east of the mountain looking back at it, which is
+   * the side Crystal's south- and east-facing terrain is on.
+   *
+   * Pitch 79 rather than 60 is what actually brings Rainier into frame: the
+   * extra tilt trades foreground for horizon. At this pitch the style's default
+   * atmosphere whites the distance out completely, so the band also relaxes the
+   * fog (see ATMOSPHERE below) — without that, the whole frame renders empty.
    */
-  band: { center: [-121.488, 46.93] as [number, number], zoom: 13.8, bearing: 270, pitch: 60 },
+  band: { center: [-121.488, 46.93] as [number, number], zoom: 13.75, bearing: 247.5, pitch: 79 },
+} as const;
+
+/**
+ * Fog for the band.
+ *
+ * Mapbox Standard's default atmosphere is tuned for a moderate pitch; at 79 it
+ * erases everything past the foreground, which is exactly the distance we are
+ * tilting up to show. Pushing the range out and flattening the horizon blend
+ * keeps Rainier, 22km away, legible on the skyline.
+ */
+export const ATMOSPHERE = {
+  range: [1, 18] as [number, number],
+  "horizon-blend": 0.03,
+  color: "#dfe8f0",
+  "high-color": "#9fc4e8",
+  "space-color": "#0c0c14",
+  "star-intensity": 0,
+};
+
+/**
+ * The run called out by the band's detail card, highlighted on the map so the
+ * card and the terrain point at the same thing. The id is the feature id in the
+ * `wemps.runs` tileset, read via tilequery.
+ */
+export const HIGHLIGHT_RUN = {
+  id: "c8d0e36bbc9cbe460600f2bcc96a8faab7eb2fff",
+  name: "Bear Pits",
+  /**
+   * A point on the run, [lng, lat], used to pin the detail card beside it.
+   *
+   * Fixed rather than derived from `queryRenderedFeatures`: that only returns
+   * features the map has actually painted, so it yields nothing before tiles
+   * land — and nothing at all in a background tab, where WebGL is paused.
+   * Projecting a known coordinate is pure maths and always works.
+   */
+  at: [-121.49183, 46.92828] as [number, number],
 } as const;
 
 /** Slope tilesets. Only North America ships — every camera is a US resort. */

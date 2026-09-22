@@ -1,5 +1,5 @@
 import type { Map as MapboxMap } from "mapbox-gl";
-import { SLOPE_TILESET } from "./config";
+import { HIGHLIGHT_RUN, SLOPE_TILESET } from "./config";
 
 /*
  * The Maps band's overlays, ported from MapController.swift so the two can be
@@ -21,10 +21,15 @@ export const FADE_MS = 500;
 
 export type OverlayKey = "satellite" | "slope" | "north";
 
+/** Exported so the detail card can project the run's position to the screen. */
+export const RUN_LINE_LAYER = "to-run-line";
+
 const LAYER_ID = {
   satellite: "to-satellite",
   slope: "to-slope-shading",
   north: "to-north-aspect",
+  runHalo: "to-run-halo",
+  runLine: RUN_LINE_LAYER,
 } as const;
 
 const SOURCE = {
@@ -159,11 +164,45 @@ function addSlopeShading(map: MapboxMap) {
   });
 }
 
-/** Add every overlay once, hidden and fully faded out. */
+/**
+ * Picks out the run the detail card describes.
+ *
+ * Two layers: a wide blurred halo so the line reads against busy satellite
+ * imagery, and a crisp line on top. Brand yellow, because every other run on
+ * the map is already coloured by difficulty and this has to be unmistakably
+ * not one of them.
+ *
+ * Added with no slot, so it lands above the style's own trail layers rather
+ * than underneath them.
+ */
+function addRunHighlight(map: MapboxMap) {
+  if (map.getLayer(LAYER_ID.runHalo)) return;
+  const common = {
+    type: "line" as const,
+    source: "composite",
+    "source-layer": "runs",
+    filter: ["==", ["get", "id"], HIGHLIGHT_RUN.id],
+    layout: { "line-cap": "round" as const, "line-join": "round" as const },
+  };
+
+  map.addLayer({
+    ...common,
+    id: LAYER_ID.runHalo,
+    paint: { "line-color": "#FFFA00", "line-width": 14, "line-opacity": 0.3, "line-blur": 6 },
+  });
+  map.addLayer({
+    ...common,
+    id: LAYER_ID.runLine,
+    paint: { "line-color": "#FFFA00", "line-width": 3.5, "line-emissive-strength": 1 },
+  } as never);
+}
+
+/** Add every overlay once, hidden and fully faded out, plus the run highlight. */
 export function addOverlays(map: MapboxMap) {
   addSatellite(map);
   addNorthAspect(map);
   addSlopeShading(map);
+  addRunHighlight(map);
 }
 
 /**

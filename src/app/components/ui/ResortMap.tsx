@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { CAMERA, SLOPE_MIN_ZOOM } from "../../map/config";
+import { ATMOSPHERE, CAMERA, HIGHLIGHT_RUN, SLOPE_MIN_ZOOM } from "../../map/config";
 import { useMapbox } from "../../map/useMapbox";
 import { addOverlays, showOverlay, type OverlayKey } from "../../map/layers";
+import { useRunAnchor } from "../../map/useRunAnchor";
 
 /** `terrain` is the base view — the styled mountain with no overlay on it. */
 type LayerKey = "terrain" | OverlayKey;
+
+/** Matches the width in components.css; the anchor maths needs it in JS. */
+const RUN_CARD_WIDTH = 290;
 
 const TOGGLES: { key: LayerKey; label: string }[] = [
   { key: "terrain", label: "3D terrain" },
@@ -24,7 +28,9 @@ const TOGGLES: { key: LayerKey; label: string }[] = [
  * south/east orientation rather than a measurement.
  */
 const RUN = {
-  name: "Bear Pits",
+  // Name comes from the shared constant so the card and the highlighted line on
+  // the map can never point at different runs.
+  name: HIGHLIGHT_RUN.name,
   vertical: "1,180 ft vertical · 0.6 mi",
   pitch: "Max sustained pitch 41.2°",
   character: "East-facing glades · expert",
@@ -53,10 +59,14 @@ export function ResortMap() {
   });
 
   const [active, setActive] = useState<LayerKey>("terrain");
+  // Pins the detail card beside the highlighted run instead of the corner.
+  const anchor = useRunAnchor(map, RUN_CARD_WIDTH);
 
   useEffect(() => {
     if (!map) return;
     addOverlays(map);
+    // Must be applied for the camera to show anything at this pitch; see config.
+    map.setFog(ATMOSPHERE as never);
   }, [map]);
 
   // The cleanup cancels any fade still in flight, so a pending timer can never
@@ -98,7 +108,27 @@ export function ResortMap() {
         </p>
       </div>
 
-      <div className="maps-run">
+      {anchor && (
+        <span
+          className="maps-run__pin"
+          style={{ left: anchor.x, top: anchor.y }}
+          aria-hidden="true"
+        />
+      )}
+
+      <div
+        className={`maps-run ${anchor ? "maps-run--pinned" : ""}`}
+        style={
+          anchor
+            ? {
+                left: anchor.flip ? anchor.x - 28 - RUN_CARD_WIDTH : anchor.x + 28,
+                // Clamped so a run near the top or bottom edge can't push the
+                // card out of the band.
+                top: Math.min(Math.max(anchor.y, 110), 510),
+              }
+            : undefined
+        }
+      >
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
           <span style={{ width: 13, height: 13, background: "#fff", transform: "rotate(45deg)" }} aria-hidden="true" />
           <span style={{ fontWeight: 700, fontSize: 16, color: "#fff" }}>{RUN.name}</span>
