@@ -2,16 +2,11 @@ import type { ReactNode } from "react";
 import { SectionHeading, Lead } from "../ui/Section";
 import { CREW_BETA_URL } from "../../config";
 import { trackEvent } from "../../analytics";
+import { CrewMap } from "../ui/CrewMap";
+import { CREW, CREW_AVATARS, type CrewTone } from "../../data/crew";
 
-const AVATARS = {
-  lime: "linear-gradient(135deg,#FFFA00,#C6EE7A)",
-  teal: "linear-gradient(135deg,#43EDEA,#A048FA)",
-  magenta: "linear-gradient(135deg,#FF02E6,#FFFA00)",
-  mint: "linear-gradient(135deg,#C6EE7A,#43EDEA)",
-} as const;
-
-function Avatar({ tone, size = 24 }: { tone: keyof typeof AVATARS; size?: number }) {
-  return <span aria-hidden="true" style={{ width: size, height: size, borderRadius: "50%", background: AVATARS[tone], flex: "none" }} />;
+function Avatar({ tone, size = 24 }: { tone: CrewTone; size?: number }) {
+  return <span aria-hidden="true" style={{ width: size, height: size, borderRadius: "50%", background: CREW_AVATARS[tone], flex: "none" }} />;
 }
 
 function CrewRow({
@@ -42,13 +37,6 @@ function CrewRow({
     </div>
   );
 }
-
-const ROSTER = [
-  { name: "Elroy", tone: "lime", seen: "now", fresh: true },
-  { name: "Britt", tone: "teal", seen: "now", fresh: true },
-  { name: "Dana", tone: "magenta", seen: "3m", fresh: false },
-  { name: "Papa", tone: "mint", seen: "41m", fresh: false },
-] as const;
 
 const BOARD = [
   { rank: 1, name: "Elroy J.", tone: "lime", runs: "14 runs", vert: "21,400", you: false },
@@ -111,17 +99,13 @@ export function Crew() {
             </>
           }
           aside={
-            /* PLACEHOLDER — crew pins on a trail map (1120 x 720). See design/HANDOFF.md. */
-            <div className="crew-aside crew-map">
-              <span style={{ position: "absolute", left: 20, bottom: 20, fontWeight: 500, fontSize: 11, lineHeight: 1.7, letterSpacing: "0.12em", color: "var(--muted-grey)" }}>
-                MAP CAPTURE · CREW PINS ON TRAIL MAP
-                <br />
-                1120 × 720
-              </span>
+            <CrewMap>
               <div className="crew-roster">
-                <div style={{ fontWeight: 500, fontSize: 10, letterSpacing: "0.09em", color: "var(--muted-grey)", marginBottom: 12 }}>ON THE HILL · 4</div>
+                <div style={{ fontWeight: 500, fontSize: 10, letterSpacing: "0.09em", color: "var(--muted-grey)", marginBottom: 12 }}>
+                  ON THE HILL · {CREW.length}
+                </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                  {ROSTER.map((r) => (
+                  {CREW.map((r) => (
                     <div key={r.name} style={{ display: "flex", alignItems: "center", gap: 9 }}>
                       <Avatar tone={r.tone} />
                       <span style={{ flex: 1, fontWeight: 600, fontSize: 12.5 }}>{r.name}</span>
@@ -130,7 +114,7 @@ export function Crew() {
                   ))}
                 </div>
               </div>
-            </div>
+            </CrewMap>
           }
         />
 

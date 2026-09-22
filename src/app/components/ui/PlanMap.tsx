@@ -1,82 +1,37 @@
-import { useEffect, useRef, useState } from "react";
-import type { Map as LeafletMap } from "leaflet";
+import { CAMERA, HAS_MAPBOX, STYLE } from "../../map/config";
+import { staticMapURL } from "../../map/staticImage";
 
-/** Palisades Tahoe. */
-const CENTER: [number, number] = [39.1969, -120.2356];
-
-/*
- * The design specifies CARTO's `dark_all` basemap. That endpoint now stamps every
- * tile served without an API key with an "API KEY REQUIRED" watermark, so tiles
- * are only requested when a key is configured — otherwise we render the styled
- * panel on its own, which reads as intentional rather than broken.
- *
- * Set VITE_CARTO_API_KEY (see .env.example) to turn the real map on.
- */
-const CARTO_KEY = import.meta.env.VITE_CARTO_API_KEY;
-const TILE_URL = `https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png${
-  CARTO_KEY ? `?api_key=${CARTO_KEY}` : ""
-}`;
+const WIDTH = 360;
+const HEIGHT = 340;
 
 /**
- * The non-interactive trail map behind demo chapter one.
+ * The trail map behind demo chapter one.
  *
- * Leaflet is imported dynamically so it lands in its own chunk rather than the
- * main bundle — it's a decorative map on a marketing page, not a feature. Every
- * interaction handler is off: this is a picture that happens to be tiles.
+ * A static image rather than a live map: HANDOFF.md specifies this map is
+ * non-interactive, so a GL JS instance would buy nothing and cost a billed map
+ * load — one every 15.6s, in fact, since DayDemo remounts the active chapter on
+ * every autoplay cycle. An `<img>` with a stable src just re-renders from cache.
+ *
+ * The design asked for CARTO's dark basemap; this uses the app's own
+ * pre-Standard dark style instead, which is closer to the product and draws real
+ * runs and lifts in a cyan that happens to match --teal-bright.
  */
 export function PlanMap() {
-  const hostRef = useRef<HTMLDivElement>(null);
-  const [tilesOn] = useState(Boolean(CARTO_KEY));
-
-  useEffect(() => {
-    const host = hostRef.current;
-    if (!host || !tilesOn) return;
-
-    let map: LeafletMap | null = null;
-    let cancelled = false;
-    let timer: ReturnType<typeof setTimeout>;
-
-    (async () => {
-      const [L] = await Promise.all([import("leaflet"), import("leaflet/dist/leaflet.css")]);
-      if (cancelled || !hostRef.current) return;
-
-      map = L.map(host, {
-        center: CENTER,
-        zoom: 13,
-        zoomControl: false,
-        attributionControl: false,
-        dragging: false,
-        scrollWheelZoom: false,
-        doubleClickZoom: false,
-        touchZoom: false,
-        keyboard: false,
-      });
-
-      L.tileLayer(TILE_URL, { maxZoom: 18 }).addTo(map);
-      L.circleMarker(CENTER, {
-        radius: 9,
-        color: "#0C0C14",
-        weight: 3,
-        fillColor: "#43EDEA",
-        fillOpacity: 1,
-      }).addTo(map);
-
-      // The panel animates in, so the container's final size settles a beat late.
-      timer = setTimeout(() => map?.invalidateSize(), 60);
-    })();
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-      map?.remove();
-    };
-  }, [tilesOn]);
+  const src = HAS_MAPBOX
+    ? staticMapURL({
+        style: STYLE.dark,
+        center: CAMERA.demo.center,
+        zoom: CAMERA.demo.zoom,
+        width: WIDTH,
+        height: HEIGHT,
+      })
+    : null;
 
   return (
     <div
-      className="demo-aside demo-map"
+      className="demo-aside demo-map to-map to-map--dark"
       style={{
-        width: 360,
+        width: WIDTH,
         borderRadius: 20,
         overflow: "hidden",
         border: "1px solid var(--hairline)",
@@ -84,14 +39,19 @@ export function PlanMap() {
         position: "relative",
       }}
     >
-      <div
-        ref={hostRef}
-        style={{ width: "100%", height: 340, position: "relative" }}
-        role="img"
-        aria-label="Trail map of Palisades Tahoe"
-      >
-        {!tilesOn && (
-          // Keyless fallback: the contour wash and marker, minus the basemap.
+      <div style={{ width: "100%", height: HEIGHT, position: "relative" }}>
+        {src ? (
+          <img
+            src={src}
+            alt="Trail map of Palisades Tahoe"
+            width={WIDTH}
+            height={HEIGHT}
+            loading="lazy"
+            decoding="async"
+            className="to-map__img"
+          />
+        ) : (
+          // No token configured: the contour wash and marker, minus the basemap.
           <div
             aria-hidden="true"
             style={{
@@ -125,7 +85,7 @@ export function PlanMap() {
           position: "absolute",
           left: 14,
           top: 14,
-          zIndex: 500,
+          zIndex: 2,
           padding: "9px 13px",
           borderRadius: 14,
           background: "rgba(12,12,20,.82)",
@@ -142,7 +102,7 @@ export function PlanMap() {
           position: "absolute",
           right: 14,
           bottom: 14,
-          zIndex: 500,
+          zIndex: 2,
           padding: "7px 12px",
           borderRadius: 32,
           background: "rgba(12,12,20,.82)",

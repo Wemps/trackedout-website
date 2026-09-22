@@ -11,4 +11,11 @@ export default defineConfig({
     },
   },
   assetsInclude: ['**/*.svg'],
+  build: {
+    // mapbox-gl v3 is ~1.9MB raw / ~530KB gzipped, in its own lazily-loaded
+    // chunk that is only fetched when the Maps band scrolls into view. That is
+    // the point of the dynamic import, not a regression — so don't warn on it.
+    // The main bundle is the number to watch; it should stay near 92KB gzipped.
+    chunkSizeWarningLimit: 2000,
+  },
 })

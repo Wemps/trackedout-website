@@ -18,7 +18,7 @@ Stack, matching [signalcab-website](https://github.com/Wemps/signalcab-website):
 - [React](https://react.dev) 18 + [React Router](https://reactrouter.com) 7
 - [Vite](https://vite.dev) 6 + TypeScript
 - [Tailwind CSS](https://tailwindcss.com) v4 (utilities) over a CSS-variable token layer
-- [Leaflet](https://leafletjs.com) for the one non-interactive trail map
+- [Mapbox GL JS](https://docs.mapbox.com/mapbox-gl-js/) and the Static Images API for the three maps
 - Deployed to [GitHub Pages](https://pages.github.com) on push to `main`
 
 ## Local development
@@ -37,7 +37,7 @@ Both are optional — the site builds and runs without them.
 | Variable | Effect if unset |
 |---|---|
 | `VITE_GA_MEASUREMENT_ID` | No analytics script is injected. |
-| `VITE_CARTO_API_KEY` | The demo trail map renders as a styled panel with no basemap. |
+| `VITE_MAPBOX_TOKEN` | All three maps fall back to their styled placeholders. |
 
 Set them in a local `.env`, and as GitHub Actions secrets for deploys. See `.env.example`.
 
@@ -63,14 +63,23 @@ and the PNGs are exported at 2–5x their display size. The script takes the bun
 ## Before launch
 
 - [ ] **App Store URL** — `src/app/config.ts` has a placeholder ID and an empty provider token.
-- [ ] **Maps hero band** — still the striped placeholder; needs the 3D resort flyover capture.
-- [ ] **Crew live map** — still a placeholder; needs crew pins on a trail map.
+- [ ] **Keep the two legacy Mapbox styles alive.** The demo and crew maps render
+      `TrackedOut-Dark-v3-Basic` and `TrackedOut-Light-v3-Basic`, which the iOS app dropped in
+      `be4560d7` and which survive only because nobody deleted them. The Static Images API
+      refuses any style that imports Mapbox Standard, so the current app style cannot replace
+      them. Either mark them keep-alive or duplicate them as web-owned styles.
+- [ ] **Mapbox URL restrictions + monthly spend limit** before launch. The band costs one
+      billed map load per visitor who scrolls to it; the other two maps are image requests.
 - [ ] **Reviews** — the 4.8 rating and three quotes are invented mock copy. (Deliberately not
       published as `aggregateRating` structured data until they're real.)
 - [ ] **Resort counts** — 4,072 resorts / 38 countries are from the mock; confirm before shipping.
 - [ ] **Privacy policy + EULA** — footer links are placeholders; the App Store listing needs a
       real privacy URL.
-- [ ] **CARTO API key**, or swap the demo map for another tile source.
+- [ ] **Privacy policy must mention Mapbox.** GL JS sends a billing beacon to
+      `events.mapbox.com` and writes `mapbox.eventData` to localStorage. It cannot be disabled,
+      and it sits awkwardly beside "Nothing about your day leaves your phone."
+- [ ] **"Gandy's Right"** on the Maps band is unverified copy — confirm the run exists at
+      Crystal Mountain or rename the card to one visible in frame.
 - [ ] **DeadStock font licensing** — used for the "Go Track" wordmark and the crew beta button.
       Unconfirmed for web embedding; an SVG lockup is the safe fallback.
 - [ ] **Stat cards** — currently flat PNG exports of app components. Rebuild as real components
