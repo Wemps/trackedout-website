@@ -1,9 +1,9 @@
 /*
- * TODO(launch): replace with the real App Store listing once Tracked Out ships.
- * Every download button on the page routes through `appStoreURL`, so this is the
- * single place that changes.
+ * The App Store listing. Every download button on the page routes through
+ * `appStoreURL`, so this is the single place that changes.
  */
-const APP_STORE_BASE = "https://apps.apple.com/app/tracked-out/id0000000000";
+const APP_STORE_BASE =
+  "https://apps.apple.com/us/app/tracked-out-ski-snowboard/id1541573890";
 
 /** Apple provider ID, from App Store Connect → Analytics → Acquisition → Campaigns. */
 const PROVIDER_TOKEN = "";
