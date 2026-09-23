@@ -1,5 +1,20 @@
 name: Deploy to GitHub Pages
 
+# Deploys to https://wemps.github.io/trackedout-website/.
+#
+# GOING LIVE ON trackedout.app: the domain currently serves a Squarespace site,
+# so the cutover is deliberate and has to happen in this order.
+#
+#   1. Point DNS at Pages: ALIAS/A on the apex to GitHub's four addresses
+#      (185.199.108-111.153) and a CNAME on www -> wemps.github.io.
+#   2. Only then set the custom domain, either in repo settings or with
+#      `gh api -X PUT repos/Wemps/trackedout-website/pages -f cname=trackedout.app`.
+#
+# A `public/CNAME` file would do step 2 on its own, from the build artifact, the
+# moment it lands — which is why there isn't one. Setting the domain before DNS
+# moves doesn't fail loudly: Pages starts redirecting the URL above to
+# trackedout.app, so the deployed site becomes unreachable at both addresses.
+
 on:
   push:
     branches: [main]
