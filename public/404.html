@@ -6,11 +6,16 @@
     <script>
       // GitHub Pages SPA shim: encode the requested path into a query string the
       // app decodes on boot (see the restore script in index.html).
+      //
+      // A project site serves the repo from its own path segment, which belongs
+      // to the site root, not to the route — keep it. On a custom domain there
+      // is no such segment. Same test the router's basename uses.
       var l = window.location;
+      var keep = l.hostname.endsWith('.github.io') ? 1 : 0;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1).join('/') + '/?/' +
-        l.pathname.slice(1).replace(/&/g, '~and~') +
+        l.pathname.split('/').slice(0, 1 + keep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(keep).join('/').replace(/&/g, '~and~') +
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
