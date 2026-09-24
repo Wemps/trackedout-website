@@ -1,4 +1,5 @@
 import { SUPPORT_EMAIL } from "../config";
+import { trackEvent } from "../analytics";
 import logo from "../../assets/logo-trackedout.webp";
 
 const COLUMNS = [
@@ -47,7 +48,19 @@ export function Footer() {
             <div key={col.heading} style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
               <div style={{ fontWeight: 600, fontSize: 12, letterSpacing: "0.1em", color: "#71716C", marginBottom: 4 }}>{col.heading}</div>
               {col.links.map((l) => (
-                <a key={l.label} href={l.href} style={{ color: "#E2E2E8", fontSize: 14 }}>
+                <a
+                  key={l.label}
+                  href={l.href}
+                  // A mailto hands the visitor to their mail client and fires no
+                  // navigation GA can see, so these are otherwise invisible.
+                  // The in-page anchors above are left alone on purpose.
+                  onClick={
+                    l.href.startsWith("mailto:")
+                      ? () => trackEvent("support_click", { topic: l.label })
+                      : undefined
+                  }
+                  style={{ color: "#E2E2E8", fontSize: 14 }}
+                >
                   {l.label}
                 </a>
               ))}

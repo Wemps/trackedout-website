@@ -3,6 +3,7 @@ import { useParallax } from "../../hooks/useParallax";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { PlanMap } from "../ui/PlanMap";
 import phone from "../../../assets/hero-phone-trim.webp";
+import { trackEvent } from "../../analytics";
 
 /** Chapter duration, and the tick that drives the progress rails. */
 const DURATION = 5200;
@@ -210,6 +211,9 @@ export function DayDemo() {
     setPhase(i);
     setElapsed(0);
     setPlaying(false);
+    // Only the tabs call this. Autoplay advances `phase` directly, so what
+    // lands in GA is someone choosing a chapter, not the carousel ticking.
+    trackEvent("demo_chapter_select", { chapter: CHAPTERS[i].title });
   };
 
   const frac = playing && !reduced ? Math.min(1, elapsed / DURATION) : 1;

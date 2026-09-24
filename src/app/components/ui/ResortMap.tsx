@@ -3,6 +3,7 @@ import { ATMOSPHERE, CAMERA, HIGHLIGHT_RUN, SLOPE_MIN_ZOOM } from "../../map/con
 import { useMapbox } from "../../map/useMapbox";
 import { addOverlays, showOverlay, type OverlayKey } from "../../map/layers";
 import { useRunAnchor } from "../../map/useRunAnchor";
+import { trackEvent } from "../../analytics";
 
 /** `terrain` is the base view — the styled mountain with no overlay on it. */
 type LayerKey = "terrain" | OverlayKey;
@@ -96,7 +97,10 @@ export function ResortMap() {
             role="radio"
             aria-checked={active === t.key}
             disabled={status !== "ready"}
-            onClick={() => setActive(t.key)}
+            onClick={() => {
+              setActive(t.key);
+              trackEvent("map_layer_toggle", { layer: t.key });
+            }}
             className={`maps-layer ${active === t.key ? "maps-layer--on" : ""}`}
           >
             {t.label}
