@@ -22,7 +22,7 @@ const STATIC_ROUTES: Record<string, { title: string; description: string }> = {
   support: {
     title: 'Support — Tracked Out',
     description:
-      'Get help with Tracked Out. Send us a message and the person who built the app will write back.',
+      'Get help with Tracked Out. Send us a message.',
   },
 }
 

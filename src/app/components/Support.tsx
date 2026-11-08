@@ -18,7 +18,7 @@ const TOPICS = ["A question", "Something's broken", "A feature idea", "Pro Pass 
 export function Support() {
   usePageMeta({
     title: "Support",
-    description: "Get help with Tracked Out. Send us a message and the person who built the app will write back.",
+    description: "Get help with Tracked Out. Send us a message.",
   });
 
   const [topic, setTopic] = useState(TOPICS[0]);
@@ -43,9 +43,7 @@ export function Support() {
         <Container style={{ maxWidth: 720 }}>
           <p className="support-eyebrow">SUPPORT</p>
           <SectionHeading>Stuck on the hill?</SectionHeading>
-          <Lead>
-            Tell us what's going on. The person who built Tracked Out reads every message and writes back.
-          </Lead>
+          <Lead>Tell us what's going on.</Lead>
 
           <form className="support-form" onSubmit={onSubmit}>
             <label className="support-field">
