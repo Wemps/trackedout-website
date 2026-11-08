@@ -3,6 +3,7 @@ import { useScrolledPast, smoothstep } from "../hooks/useScrollY";
 import { trackEvent } from "../analytics";
 import logoFull from "../../assets/logo-trackedout.webp";
 import logoWord from "../../assets/logo-wordmark.webp";
+import { SiteLink } from "./ui/SiteLink";
 
 const NAV = [
   { href: "#day", label: "How it works" },
@@ -93,18 +94,18 @@ export function Header() {
           margin: "0 auto",
         }}
       >
-        <a href="#top" aria-label="Tracked Out — home" style={{ position: "relative", display: "block", width: 82, height: 52 }}>
+        <SiteLink href="#top" aria-label="Tracked Out — home" style={{ position: "relative", display: "block", width: 82, height: 52 }}>
           <img ref={fullRef} src={logoFull} alt="Tracked Out" style={imgStyle} />
           <img ref={wordRef} src={logoWord} alt="" aria-hidden="true" style={{ ...imgStyle, opacity: 0 }} />
-        </a>
+        </SiteLink>
 
         <nav className="site-nav" style={{ display: "flex", alignItems: "center", gap: 30, fontWeight: 500, fontSize: 14, color: "#3A3A3E" }}>
           {NAV.map((item) => (
-            <a key={item.href} href={item.href}>
+            <SiteLink key={item.href} href={item.href}>
               {item.label}
-            </a>
+            </SiteLink>
           ))}
-          <a
+          <SiteLink
             href="#get"
             onClick={() => trackEvent("app_store_click", { placement: "header" })}
             style={{
@@ -117,7 +118,7 @@ export function Header() {
             }}
           >
             Get the app
-          </a>
+          </SiteLink>
         </nav>
 
         {/* Below 900px the nav collapses — the design stopped at desktop, see design/HANDOFF.md. */}
@@ -136,11 +137,11 @@ export function Header() {
       {menuOpen && (
         <nav id="mobile-nav" className="mobile-nav">
           {NAV.map((item) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+            <SiteLink key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
               {item.label}
-            </a>
+            </SiteLink>
           ))}
-          <a
+          <SiteLink
             href="#get"
             onClick={() => {
               setMenuOpen(false);
@@ -149,7 +150,7 @@ export function Header() {
             className="mobile-nav__cta"
           >
             Get the app
-          </a>
+          </SiteLink>
         </nav>
       )}
     </header>

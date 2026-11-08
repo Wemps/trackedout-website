@@ -689,3 +689,175 @@
 @media (prefers-reduced-motion: reduce) {
   .maps-run--pinned { transition: none; }
 }
+
+/* ---- Support page (/support) ---- */
+
+.support-eyebrow {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  color: var(--teal-deep);
+  margin: 0 0 18px;
+}
+
+.support-contact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin-top: 36px;
+}
+
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 26px 28px;
+  border-radius: 22px;
+  background: var(--white);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+}
+.support-card--dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow-dark);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.support-card--dark:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark-hover);
+}
+.support-card__label {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted-grey);
+}
+.support-card--dark .support-card__label { color: var(--teal-bright); }
+.support-card__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.05;
+  overflow-wrap: break-word;
+}
+.support-card__body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--body-grey);
+}
+.support-card--dark .support-card__body { color: var(--muted-warm); }
+
+.support-jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+.support-jump a {
+  padding: 8px 16px;
+  border-radius: 32px;
+  border: 1px solid var(--hairline-strong);
+  font-weight: 500;
+  font-size: 14px;
+  color: #3a3a3e;
+}
+.support-jump a:hover { border-color: var(--teal-deep); }
+
+.support-group {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 40px;
+  padding: 40px 0;
+  border-top: 1px solid var(--hairline-strong);
+}
+.support-group__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 3.4vw, 42px);
+  line-height: 1.05;
+}
+
+.support-qa { border-bottom: 1px solid var(--hairline); }
+.support-qa:first-child { border-top: 1px solid var(--hairline); }
+.support-qa summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 20px 0;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.support-qa summary::-webkit-details-marker { display: none; }
+.support-qa summary::after {
+  content: "+";
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--teal-deep);
+  transition: transform 0.2s ease;
+}
+.support-qa[open] summary::after { transform: rotate(45deg); }
+.support-qa summary:hover { color: var(--teal-deeper); }
+.support-qa summary:focus-visible { outline: 2px solid var(--teal-deep); outline-offset: 4px; border-radius: 4px; }
+
+.support-qa__a {
+  padding: 0 40px 22px 0;
+  max-width: 760px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body-grey);
+}
+.support-qa__a p { margin: 0 0 12px; }
+.support-qa__a p:last-child { margin-bottom: 0; }
+.support-qa__a a { color: var(--ink); border-bottom: 2px solid var(--lime); }
+
+.support-path {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.support-band__title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(36px, 4.4vw, 56px);
+  line-height: 1;
+}
+.support-band__cta {
+  padding: 16px 30px;
+  border-radius: 32px;
+  background: var(--brand-gradient);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: var(--shadow-brand);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.support-band__cta:hover {
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-brand-hover);
+}
+
+@media (max-width: 900px) {
+  .support-hero { padding-top: 120px !important; }
+  .support-card__title { font-size: 25px; }
+  .support-contact { grid-template-columns: 1fr; }
+  .support-group { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+  .support-qa__a { padding-right: 0; }
+  .support-path { white-space: normal; }
+}

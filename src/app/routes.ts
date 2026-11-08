@@ -2,11 +2,12 @@ import { createBrowserRouter } from "react-router";
 import { Layout } from "./components/Layout";
 import { Landing } from "./components/Landing";
 import { NotFound } from "./components/NotFound";
+import { Support } from "./components/Support";
 
 /*
- * The design is a single page. The router is here so the legal pages the App Store
- * listing will need can be added without restructuring — same shape as the Signal
- * Cab site.
+ * The design is a single page; /support is the App Store listing's Support URL.
+ * The legal pages the listing needs go here the same way. Each extra route also
+ * gets a real HTML file at build time (STATIC_ROUTES in vite.config.ts).
  */
 
 /*
@@ -32,6 +33,7 @@ export const router = createBrowserRouter(
       Component: Layout,
       children: [
         { index: true, Component: Landing },
+        { path: "support", Component: Support },
         { path: "*", Component: NotFound },
       ],
     },

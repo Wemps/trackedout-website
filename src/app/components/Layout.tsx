@@ -10,6 +10,9 @@ function RouteEffects() {
     // Anchor links inside the page handle their own scrolling; only reset on a
     // genuine route change.
     if (!hash) window.scrollTo(0, 0);
+    // A router navigation to "/#maps" (from the header on /support) renders the
+    // landing page but doesn't scroll to the anchor the way a page load would.
+    else requestAnimationFrame(() => document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView());
     trackPageView(pathname);
   }, [pathname, hash]);
   return null;

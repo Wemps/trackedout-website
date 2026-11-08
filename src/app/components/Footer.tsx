@@ -1,6 +1,7 @@
 import { SUPPORT_EMAIL } from "../config";
 import { trackEvent } from "../analytics";
 import logo from "../../assets/logo-trackedout.webp";
+import { SiteLink } from "./ui/SiteLink";
 
 const COLUMNS = [
   {
@@ -15,7 +16,7 @@ const COLUMNS = [
   {
     heading: "SUPPORT",
     links: [
-      { label: "Help", href: `mailto:${SUPPORT_EMAIL}?subject=Help` },
+      { label: "Help", href: "/support" },
       { label: "Send feedback", href: `mailto:${SUPPORT_EMAIL}?subject=Feedback` },
       { label: "Contact", href: `mailto:${SUPPORT_EMAIL}` },
     ],
@@ -48,7 +49,7 @@ export function Footer() {
             <div key={col.heading} style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
               <div style={{ fontWeight: 600, fontSize: 12, letterSpacing: "0.1em", color: "#71716C", marginBottom: 4 }}>{col.heading}</div>
               {col.links.map((l) => (
-                <a
+                <SiteLink
                   key={l.label}
                   href={l.href}
                   // A mailto hands the visitor to their mail client and fires no
@@ -62,7 +63,7 @@ export function Footer() {
                   style={{ color: "#E2E2E8", fontSize: 14 }}
                 >
                   {l.label}
-                </a>
+                </SiteLink>
               ))}
             </div>
           ))}
