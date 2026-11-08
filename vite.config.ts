@@ -22,7 +22,7 @@ const STATIC_ROUTES: Record<string, { title: string; description: string }> = {
   support: {
     title: 'Support — Tracked Out',
     description:
-      'Help with Tracked Out: tracking that stops, battery, the Pro Pass, moving to a new phone and exporting your tracks. Or email us.',
+      'Get help with Tracked Out. Send us a message and the person who built the app will write back.',
   },
 }
 
